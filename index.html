@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Sticky Note</title>
+	<style>
+		.sticky-note-container:hover .sticky-note {
+			transform: rotateY(180deg);
+		}
+
+		.sticky-note {
+			transition: 1s;
+			perspective: 1000px;
+			position: relative;
+			width: 100px;
+			height: 100px;
+			transform: rotateY(180deg);
+		}
+
+		.sticky-note.flip {
+			transform: rotateY(180deg);
+		}
+
+		.front, .back {
+			backface-visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100px;
+			height: 100px;
+		}
+
+		.front {
+			background-color: yellow;
+		}
+
+		.back {
+			background-color: blue;
+			transform: rotateY(-180deg);
+		}
+
+		.flip {
+			transition: 1s;
+			transform-style: preserve-3d;
+		}
+	</style>
+	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$().ready(function(){
+		var stickyNotes = $('.sticky-note');
+		console.log(stickyNotes);
+		stickyNotes.bind('click',function(){
+			var self = $(this);
+			if(self.hasClass('flip')){
+				self.removeClass('flip');
+			} else {
+				self.addClass('flip');
+			}
+		})
+	});
+	
+	</script>
+</head>
+<body>
+	<div class="sticky-note-container">
+	<div class="sticky-note">
+		<div class="back">
+			back
+		</div>
+		<div class="front">
+			front
+		</div>
+	</div>
+	</div>
+	<p>
+		ref: https://davidwalsh.name/css-flip
+	</p>
+</body>
+</html>
